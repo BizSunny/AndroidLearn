@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -60,7 +61,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private fun calulateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String{
+@VisibleForTesting
+internal fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String{
+//private fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String{
     var tip = tipPercent / 100.0 * amount
 
     if(roundUp){
@@ -87,7 +90,7 @@ fun Greeting(modifier: Modifier = Modifier) {
 
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tipPercent = tipInfo.toDoubleOrNull() ?: 0.0
-    val tip = calulateTip(amount, tipPercent, roundUp)
+    val tip = calculateTip(amount, tipPercent, roundUp)
 
     Column(
         modifier = modifier
